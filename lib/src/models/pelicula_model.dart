@@ -5,6 +5,7 @@ Pelicula peliculaFromJson(String str) => Pelicula.fromJson(json.decode(str));
 String peliculaToJson(Pelicula data) => json.encode(data.toJson());
 
 class Pelicula {
+  String uniqueId;
   double popularity;
   int voteCount;
   bool video;
@@ -77,6 +78,14 @@ class Pelicula {
       return "https://vignette.wikia.nocookie.net/edenszero/images/6/60/No_Image_Available.png/revision/latest?cb=20190614182334";
     } else {
       return "https://image.tmdb.org/t/p/w500/$posterPath";
+    }
+  }
+
+  getBackgroundImg() {
+    if (posterPath == null) {
+      return "https://vignette.wikia.nocookie.net/edenszero/images/6/60/No_Image_Available.png/revision/latest?cb=20190614182334";
+    } else {
+      return "https://image.tmdb.org/t/p/w500/$backdropPath";
     }
   }
 }
