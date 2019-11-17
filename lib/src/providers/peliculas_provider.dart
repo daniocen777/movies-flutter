@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:peliculas_app/src/models/actores_model.dart';
 import 'package:peliculas_app/src/models/pelicula_model.dart';
+import 'package:peliculas_app/src/models/video_model.dart';
 
 class PeliculasProvider {
   String _apiKey = "f34dd916baf982a8cc7269a92eb4570d";
@@ -84,5 +85,24 @@ class PeliculasProvider {
         {"api_key": _apiKey, "language": _language, "query": query});
 
     return await _procesarRespuesta(url);
+  }
+
+  Future<List<Video>> getVideos(String movieId) async {
+    final url = Uri.https(_url, "3/movie/$movieId/videos",
+        {"api_key": _apiKey, "language": _language});
+    final resp = await http.get(url);
+    final decodeData = json.decode(resp.body);
+
+    List<Video> videos = new List();
+
+    decodeData["results"].forEach((v) {
+      final temporal = Video.fromJson(v);
+      videos.add(temporal);
+      return videos;
+    });
+
+    videos.forEach((video) => {print(video.name)});
+
+    return videos;
   }
 }
