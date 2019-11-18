@@ -89,7 +89,7 @@ class PeliculasProvider {
 
   Future<List<Video>> getVideos(String movieId) async {
     final url = Uri.https(_url, "3/movie/$movieId/videos",
-        {"api_key": _apiKey, "language": _language});
+        {"api_key": _apiKey, "language": "en-EN"});
     final resp = await http.get(url);
     final decodeData = json.decode(resp.body);
 
@@ -100,8 +100,6 @@ class PeliculasProvider {
       videos.add(temporal);
       return videos;
     });
-
-    videos.forEach((video) => {print(video.name)});
 
     return videos;
   }

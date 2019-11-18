@@ -18,7 +18,9 @@ class PeliculaDetalle extends StatelessWidget {
                 SizedBox(height: 10.0),
                 _posterTitulo(context, pelicula),
                 _descripcion(pelicula),
-                _crearCasting(pelicula)
+                _crearCasting(pelicula),
+                
+                _irATrailers(context, pelicula)
               ]),
             )
           ],
@@ -148,6 +150,18 @@ class PeliculaDetalle extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           )
         ],
+      ),
+    );
+  }
+
+  Widget _irATrailers(BuildContext context, Pelicula pelicula) {
+    return Center(
+      child: ListTile(
+        leading: Icon(Icons.local_movies),
+        title: Text("Ver trailers"),
+        onTap: () {
+          Navigator.pushNamed(context, "trailer", arguments: pelicula);
+        },
       ),
     );
   }

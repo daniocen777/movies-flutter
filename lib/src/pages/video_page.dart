@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:peliculas_app/src/models/video_model.dart';
 import 'package:youtube_player/youtube_player.dart';
 
-class TestPage extends StatefulWidget {
-  TestPage({Key key}) : super(key: key);
+class VideoPage extends StatefulWidget {
+  VideoPage({Key key}) : super(key: key);
 
   @override
-  _TestPageState createState() => _TestPageState();
+  _VideoPageState createState() => _VideoPageState();
 }
 
-class _TestPageState extends State<TestPage> {
-  String id = "t433PEQGErc";
-
+class _VideoPageState extends State<VideoPage> {
   @override
   Widget build(BuildContext context) {
+    final Video video = ModalRoute.of(context).settings.arguments;
+    String id = video.key;
     return Scaffold(
         appBar: AppBar(
-          title: Text('holasss'),
+          title: Text(video.name, style: TextStyle(fontSize: 12.0),),
         ),
         body: SingleChildScrollView(
           child: Column(
